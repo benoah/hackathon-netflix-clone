@@ -33,16 +33,21 @@ function loadTv(tvShow) {
   for (let i = 0; i < tvShow.length; i++) {
     // console.log(tvShow[i].summary);
     html += `<div class= "mainCard">
-        ${image}
+         ${image}
         <img>${tvShow[i].show.image.medium}>
         <h3>${tvShow[i].name}</h3>
         <p>${tvShow[i].summary}</P>
-        
          </div>`;
   }
 
   televisionContainer.innerHTML = html;
 }
+
+
+
+
+
+
 
 function imageLoader(images) {
   let html = "";
