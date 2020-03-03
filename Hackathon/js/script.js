@@ -7,7 +7,7 @@ create search input, this input should filter the character cards,
 this should only be triggerd on a click pf a button.*/
 
 // did make a call to api
-const baseUrl = "http://api.tvmaze.com/schedule";
+const baseUrl ="http://api.tvmaze.com/shows";
 
 //and passing the JSON object it returns to a function
 fetch(baseUrl)
@@ -21,44 +21,45 @@ fetch(baseUrl)
     console.dir(error);
   });
 
-// this part is titel and summary of the show is ready
 
-function loadTv(tvShow) {
-  // function code her
-  const televisionContainer = document.querySelector(".container");
-  let image = imageLoader(tvShow);
-  // rest of my function code here
-  // empty html variabels
-  let html = "";
-  for (let i = 0; i < tvShow.length; i++) {
-    // console.log(tvShow[i].summary);
-    html += `<div class= "mainCard">
-         ${image}
-        <img>${tvShow[i].show.image.medium}>
-        <h3>${tvShow[i].name}</h3>
-        <p>${tvShow[i].summary}</P>
-         </div>`;
-  }
+  function loadTv(results){
+    const tvShow =document.querySelector("#columngrid")
+    for (let i = 0; i < results.length; i++) {
+      console.dir(results);
 
-  televisionContainer.innerHTML = html;
+     
+
+      tvShow.innerHTML += `
+    <div class="column is-one-quarter">
+    <div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+    <img src="${results[i].image.medium}" alt="${results[i].name}">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+       <h3>Rating</h3><bold>${results[i].rating.average}</bold>
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">${results[i].name}</p>
+        <p><olclass="subtitle is-6 ">${results[i].genres}</ol><p/><br>
+        <p>${results[i].network.name}</p>
+        <p><time datetime=${results[i].schedule.time}>${results[i].schedule.time}</time>${results[i].schedule.days}</p>
+        <div class="buttons">
+        <button class="button is-primary">Details</button>
+      </div>     
+      </div>
+    </div>
+    `
 }
+tvShow.innerHTML = card;
+  };
 
+  
 
-
-
-
-
-
-function imageLoader(images) {
-  let html = "";
-
-  for (let i = 0; i < images.length; i++) {
-    // console.log(images[i].show.image.medium);
-
-    html += `
-        <img src="${images[i].show.image.medium}">
-         `;
-  }
-  console.log(html);
-  return html;
-}
+  
+  
